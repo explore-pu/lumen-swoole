@@ -1,0 +1,24 @@
+{
+    "name": "explore-pu/lumen-swoole",
+    "description": "speed up lumen framework by swoole",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xiaozhi",
+            "email": "xiaozhi2015@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-swoole": "*",
+        "laravel/lumen-framework": ">=10.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "ExplorePu\\LumenSwoole\\": "src/"
+        }
+    }
+}
