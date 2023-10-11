@@ -1,5 +1,5 @@
 {
-    "name": "explore-pu/lumen-swoole",
+    "name": "xiaozhi/lumen-swoole",
     "description": "speed up lumen framework by swoole",
     "type": "library",
     "license": "MIT",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ExplorePu\\LumenSwoole\\": "src/"
+            "XiaoZhi\\LumenSwoole\\": "src/"
         }
     }
 }

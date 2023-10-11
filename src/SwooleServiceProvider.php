@@ -1,31 +1,32 @@
 <?php
 
-namespace ExplorePu\LumenSwoole;
+namespace XiaoZhi\LumenSwoole;
 
-use ExplorePu\LumenSwoole\Swoole\HttpServer;
 use Illuminate\Support\ServiceProvider;
+use XiaoZhi\LumenSwoole\Swoole\HttpServer;
+use XiaoZhi\LumenSwoole\Swoole\WebsocketServer;
 
 class SwooleServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/../config' => base_path('config')], 'swoole-config');
-        }
-    }
-
     public function register(): void
     {
         $this->commands([
+            Console\VendorPublishCommand::class,
             Console\SwooleHttpCommand::class,
+            Console\SwooleWebsocketCommand::class,
         ]);
 
         $this->mergeConfigFrom(__DIR__ . '/../config/swoole.php', 'swoole');
 
-        $this->app->singleton('swoole.http', function ($app) {
-            $config = $app['config']['swoole'];
+        $config = config('swoole');
 
-            return new HttpServer($config);
+        $this->app->singleton('swoole.http', function () use ($config) {
+            return new HttpServer($config['http']);
+        });
+
+        $this->app->singleton('swoole.websocket', function () use ($config) {
+            $websocket_server = $config['websocket']['server'];
+            return new $websocket_server($config['websocket']);
         });
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace ExplorePu\LumenSwoole\Swoole;
+namespace XiaoZhi\LumenSwoole\Swoole;
 
 use Swoole\Http\Request;
 use Swoole\Http\Response;

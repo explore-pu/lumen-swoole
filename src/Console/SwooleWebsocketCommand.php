@@ -4,11 +4,11 @@ namespace XiaoZhi\LumenSwoole\Console;
 
 use Illuminate\Console\Command;
 
-class SwooleHttpCommand extends Command
+class SwooleWebsocketCommand extends Command
 {
-    protected $signature = 'swoole:http {action}';
+    protected $signature = 'swoole:websocket {action}';
 
-    protected $description = 'Operate swoole http server with start|stop|restart|reload|status';
+    protected $description = 'Operate swoole websocket server with start|stop|restart|reload|status';
 
     /**
      * @var \Laravel\Lumen\Application|mixed
@@ -24,13 +24,13 @@ class SwooleHttpCommand extends Command
     {
         parent::__construct();
 
-        $this->log_file = config('swoole.http.log_file');
+        $this->log_file = config('swoole.websocket.log_file');
         $log_path = str_replace('/' . basename($this->log_file), '', $this->log_file);
         if (!is_dir($log_path)) {
             mkdir($log_path, 0755, true);
         }
 
-        $this->pid_file = config('swoole.http.pid_file');
+        $this->pid_file = config('swoole.websocket.pid_file');
         $pid_path = str_replace('/' . basename($this->pid_file), '', $this->pid_file);
         if (!is_dir($pid_path)) {
             mkdir($pid_path, 0755, true);
@@ -76,12 +76,12 @@ class SwooleHttpCommand extends Command
     protected function start(): void
     {
         if ($this->getPid()) {
-            $this->error('swoole http server is already running');
+            $this->error('swoole websocket server is already running');
             exit(1);
         }
 
-        $this->info('starting swoole http server...');
-        app()->make('swoole.http');
+        $this->info('starting swoole websocket server...');
+        app()->make('swoole.websocket');
     }
 
     /**
@@ -103,7 +103,7 @@ class SwooleHttpCommand extends Command
      */
     protected function restart(): void
     {
-        $this->info('stopping swoole http server...');
+        $this->info('stopping swoole websocket server...');
         $pid = $this->sendSignal(SIGTERM);
         $time = 0;
         while (posix_getpgid($pid)) {
@@ -139,9 +139,9 @@ class SwooleHttpCommand extends Command
     {
         $pid = $this->getPid();
         if ($pid) {
-            $this->info('swoole http server is running. master pid : ' . $pid);
+            $this->info('swoole websocket server is running. master pid : ' . $pid);
         } else {
-            $this->error('swoole http server is not running!');
+            $this->error('swoole websocket server is not running!');
         }
     }
 
@@ -157,7 +157,7 @@ class SwooleHttpCommand extends Command
         if ($pid) {
             posix_kill($pid, $sig);
         } else {
-            $this->error('swoole http is not running!');
+            $this->error('swoole websocket is not running!');
             exit(1);
         }
         return $pid;
