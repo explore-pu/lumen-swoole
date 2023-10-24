@@ -18,7 +18,7 @@ return [
     'websocket' => [
         'host' => '0.0.0.0',
         'port' => 9502,
-        'server' => XiaoZhi\LumenSwoole\Library\HandleMessage::class,// 处理消息库
+        'server' => XiaoZhi\LumenSwoole\Swoole\WebsocketServer::class,// 可替换成直接的server
         'worker_num' => 4, // 设置启动的Worker进程数量,默认值：CPU 核数
         'daemonize' => true, // 是否转入后台运行
         'max_conn' => 10000, // 此参数用来设置 Server 最大允许维持多少个 TCP 连接。超过此数量后，新进入的连接将被拒绝
