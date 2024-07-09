@@ -32,8 +32,8 @@ class HttpServer
 
     public function onStart($server): void
     {
-        echo "swoole http server is started at http://" . $server->host . ":" . $server->port . "\n";
-        echo "master_pid is " . $server->master_pid . "\n";
+        echo "[" .date('Y-m-d H:i:s') . "] swoole http server is started at http://" . $server->host . ":" . $server->port . "\n";
+        echo "[" .date('Y-m-d H:i:s') . "] master_pid is " . $server->master_pid . "\n";
     }
 
     public function onWorkerStart($server, $worker_id): void

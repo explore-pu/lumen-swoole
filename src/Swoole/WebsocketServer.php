@@ -42,8 +42,8 @@ class WebsocketServer
 
     public function onStart($server): void
     {
-        echo "swoole websocket server is started at http://" . $server->host . ":" . $server->port . "\n";
-        echo "master_pid is " . $server->master_pid . "\n";
+        echo "[" .date('Y-m-d H:i:s') . "] swoole websocket server is started at http://" . $server->host . ":" . $server->port . "\n";
+        echo "[" .date('Y-m-d H:i:s') . "] master_pid is " . $server->master_pid . "\n";
     }
 
     public function onWorkerStart($server, $worker_id): void
@@ -71,7 +71,7 @@ class WebsocketServer
 
     public function onOpen(Server $server, Request $request)
     {
-        echo "client【{$request->fd}】 connect\n";
+        echo "[" .date('Y-m-d H:i:s') . "] client【{$request->fd}】 connect\n";
     }
 
     /**
@@ -93,7 +93,7 @@ class WebsocketServer
      */
     public function onMessage(Server $server, Frame $frame)
     {
-        echo "client【{$frame->fd}】 Incoming messages：{$frame->data}\n";
+        echo "[" .date('Y-m-d H:i:s') . "] client【{$frame->fd}】 Incoming messages：{$frame->data}\n";
 
         // Parse the received message,$frame->data must contain the column name set by the setTable method
         $data = json_decode($frame->data, JSON_UNESCAPED_UNICODE);
@@ -105,7 +105,7 @@ class WebsocketServer
         $this->table->set($frame->fd, $data);
 
         foreach ($this->table as $fd => $message) {
-            echo "client【{$fd}】 of data：" . json_encode($message, JSON_UNESCAPED_UNICODE) . "\n";
+            echo "[" .date('Y-m-d H:i:s') . "] client【{$fd}】 of data：" . json_encode($message, JSON_UNESCAPED_UNICODE) . "\n";
         }
 
         // 发送消息给所有客户端
@@ -116,7 +116,7 @@ class WebsocketServer
 
     public function onClose(Server $server, $fd)
     {
-        echo "client【{$fd}】 Shut down\n";
+        echo "[" .date('Y-m-d H:i:s') . "] client【{$fd}】 Shut down\n";
 
         $this->table->del($fd);
     }
