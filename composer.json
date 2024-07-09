@@ -1,7 +1,9 @@
 {
-    "name": "xiaozhi/lumen-swoole",
+    "name": "explore-pu/lumen-swoole",
     "description": "speed up lumen framework by swoole",
     "type": "library",
+    "keywords": ["lumen", "swoole", "http server", "websocket server"],
+    "homepage": "https://github.com/explore-pu/lumen-swoole",
     "license": "MIT",
     "authors": [
         {
@@ -18,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "XiaoZhi\\LumenSwoole\\": "src/"
+            "LumenSwoole\\": "src/"
         }
     }
 }

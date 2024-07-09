@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'http_server' => LumenSwoole\Swoole\HttpServer::class,// 可替换成自己的server
     'http' => [
         'host' => '0.0.0.0',
         'port' => 9501,
@@ -15,10 +16,10 @@ return [
         'heartbeat_check_interval' => 5,// 每隔多少秒检测一次，单位秒，Swoole会轮询所有TCP连接，将超过心跳时间的连接关闭
         'heartbeat_idle_time' => 10, // TCP连接的最大闲置时间，单位秒, 如果某fd最后一次发包距离现在的时间超过这个时间，连接将关闭
     ],
+    'websocket_server' => LumenSwoole\Swoole\WebsocketServer::class,// 可替换成自己的server
     'websocket' => [
         'host' => '0.0.0.0',
         'port' => 9502,
-        'server' => XiaoZhi\LumenSwoole\Swoole\WebsocketServer::class,// 可替换成直接的server
         'worker_num' => 4, // 设置启动的Worker进程数量,默认值：CPU 核数
         'daemonize' => true, // 是否转入后台运行
         'max_conn' => 10000, // 此参数用来设置 Server 最大允许维持多少个 TCP 连接。超过此数量后，新进入的连接将被拒绝

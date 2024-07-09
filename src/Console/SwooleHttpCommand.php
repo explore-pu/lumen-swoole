@@ -1,6 +1,6 @@
 <?php
 
-namespace XiaoZhi\LumenSwoole\Console;
+namespace LumenSwoole\Console;
 
 use Illuminate\Console\Command;
 

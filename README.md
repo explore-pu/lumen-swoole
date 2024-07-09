@@ -1,13 +1,13 @@
 ## 安装
 ```
-composer require xiaozhi/lumen-swoole
+composer require explore-pu/lumen-swoole
 ```
 
 ## 配置
 
 - 在bootstrap/app.php中注册service provider
 ```php
-$app->register(XiaoZhi\LumenSwoole\SwooleServiceProvider::class);
+$app->register(LumenSwoole\SwooleServiceProvider::class);
 ```
 
 - 发布配置文件

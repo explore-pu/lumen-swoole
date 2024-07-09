@@ -1,10 +1,8 @@
 <?php
 
-namespace XiaoZhi\LumenSwoole;
+namespace LumenSwoole;
 
 use Illuminate\Support\ServiceProvider;
-use XiaoZhi\LumenSwoole\Swoole\HttpServer;
-use XiaoZhi\LumenSwoole\Swoole\WebsocketServer;
 
 class SwooleServiceProvider extends ServiceProvider
 {
@@ -21,11 +19,12 @@ class SwooleServiceProvider extends ServiceProvider
         $config = config('swoole');
 
         $this->app->singleton('swoole.http', function () use ($config) {
-            return new HttpServer($config['http']);
+            $http_server = $config['http_server'];
+            return new $http_server($config['http']);
         });
 
         $this->app->singleton('swoole.websocket', function () use ($config) {
-            $websocket_server = $config['websocket']['server'];
+            $websocket_server = $config['websocket_server'];
             return new $websocket_server($config['websocket']);
         });
     }
