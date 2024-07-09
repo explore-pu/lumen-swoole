@@ -14,14 +14,12 @@ class HttpServer
 
     private $app;
 
-    public function __construct($config)
+    public function __construct($host, $port, $setting)
     {
-        $this->server = new Server($config['host'], $config['port']);
-
-        unset($config['host'], $config['port']);
+        $this->server = new Server($host, $port);
 
         #set swoole http server configuration
-        $this->server->set($config);
+        $this->server->set($setting);
 
         $this->server->on('start', array($this, 'onStart'));
         $this->server->on('workerStart', array($this, 'onWorkerStart'));

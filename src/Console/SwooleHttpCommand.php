@@ -24,13 +24,13 @@ class SwooleHttpCommand extends Command
     {
         parent::__construct();
 
-        $this->log_file = config('swoole.http.log_file');
+        $this->log_file = config('swoole.http.setting.log_file');
         $log_path = str_replace('/' . basename($this->log_file), '', $this->log_file);
         if (!is_dir($log_path)) {
             mkdir($log_path, 0755, true);
         }
 
-        $this->pid_file = config('swoole.http.pid_file');
+        $this->pid_file = config('swoole.http.setting.pid_file');
         $pid_path = str_replace('/' . basename($this->pid_file), '', $this->pid_file);
         if (!is_dir($pid_path)) {
             mkdir($pid_path, 0755, true);

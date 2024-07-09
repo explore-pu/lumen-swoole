@@ -15,16 +15,12 @@ class WebsocketServer
 
     protected Table $table;
 
-    public function __construct($config)
+    public function __construct($host, $port, $setting)
     {
-        $this->config = $config;
-
-        $this->server = new Server($this->config['host'], $this->config['port']);
-
-        unset($this->config['host'], $this->config['port'], $this->config['server']);
+        $this->server = new Server($host, $port);
 
         #set swoole http server configuration
-        $this->server->set($this->config);
+        $this->server->set($setting);
 
         $this->server->on('start', array($this, 'onStart'));
         $this->server->on('open', array($this, 'onOpen'));
@@ -42,7 +38,7 @@ class WebsocketServer
 
     public function onStart($server): void
     {
-        echo "[" .date('Y-m-d H:i:s') . "] swoole websocket server is started at http://" . $server->host . ":" . $server->port . "\n";
+        echo "[" .date('Y-m-d H:i:s') . "] swoole websocket server is started at " . $server->host . ":" . $server->port . "\n";
         echo "[" .date('Y-m-d H:i:s') . "] master_pid is " . $server->master_pid . "\n";
     }
 

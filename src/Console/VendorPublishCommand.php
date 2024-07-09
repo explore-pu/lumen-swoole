@@ -46,6 +46,6 @@ class VendorPublishCommand extends Command
         $dst = base_path('config/swoole.php');
         copy($source, $dst);
 
-        $this->info('success');
+        $this->info('the assets publish success');
     }
 }

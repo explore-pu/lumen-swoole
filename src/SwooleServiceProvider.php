@@ -16,16 +16,14 @@ class SwooleServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/../config/swoole.php', 'swoole');
 
-        $config = config('swoole');
-
-        $this->app->singleton('swoole.http', function () use ($config) {
-            $http_server = $config['http_server'];
-            return new $http_server($config['http']);
+        $this->app->singleton('swoole.http', function () {
+            $http_server = config('swoole.http.server');
+            return new $http_server(config('swoole.http.host'), config('swoole.http.port'), config('swoole.http.setting'));
         });
 
-        $this->app->singleton('swoole.websocket', function () use ($config) {
-            $websocket_server = $config['websocket_server'];
-            return new $websocket_server($config['websocket']);
+        $this->app->singleton('swoole.websocket', function () {
+            $websocket_server = config('swoole.websocket.server');
+            return new $websocket_server(config('swoole.http.host'), config('swoole.http.port'), config('swoole.http.setting'));
         });
     }
 }
